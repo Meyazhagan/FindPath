@@ -6,27 +6,27 @@ import javax.swing.border.*;
 public class PathSearching { // FRAME
 	JFrame frame;
 	// GENERAL VARIABLES
-	private int cells = 20;
-	private int delay = 30;
-	private double dense = .5;
-	private double density = (cells * cells) * .5;
-	private int startx = -1;
-	private int starty = -1;
-	private int finishx = -1;
-	private int finishy = -1;
-	private int tool = 0;
-	private int checks = 0;
-	private int length = 0;
-	private int curAlg = 0;
-	private int WIDTH = 850;
-	private final int HEIGHT = 650;
-	private final int MSIZE = 600;
-	private int CSIZE = MSIZE / cells;
+	protected int cells = 20;
+	protected int delay = 30;
+	protected double dense = .5;
+	protected double density = (cells * cells) * .5;
+	protected int startx = -1;
+	protected int starty = -1;
+	protected int finishx = -1;
+	protected int finishy = -1;
+	protected int tool = 0;
+	protected int checks = 0;
+	protected int length = 0;
+	protected int curAlg = 0;
+	protected int WIDTH = 850;
+	protected final int HEIGHT = 650;
+	protected final int MSIZE = 600;
+	protected int CSIZE = MSIZE / cells;
 	// UTIL ARRAYS
-	private String[] algorithms = { "Dijkstra", "A*" };
-	private String[] tools = { "Start", "Finish", "Wall", "Eraser" };
+	protected String[] algorithms = { "Dijkstra", "A*" };
+	protected String[] tools = { "Start", "Finish", "Wall", "Eraser" };
 	// BOOLEANS
-	private boolean solving = false;
+	protected boolean solving = false;
 	// UTIL
 	Node[][] map;
 	Algorithms Alg = new Algorithms();
