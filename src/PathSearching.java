@@ -208,8 +208,8 @@ public class PathSearching { // FRAME
 		frame.getContentPane().add(toolP);
 
 		canvas = new Map();
-		canvas.setBounds(230, 10, MSIZE + 1, MSIZE + 1);
-		frame.getContentPane().add(canvas);
+		canvas.pane.setBounds(230, 10, MSIZE + 1, MSIZE + 1);
+		frame.getContentPane().add(canvas.pane);
 
 		searchB.addActionListener(new ActionListener() { // ACTION LISTENERS
 			@Override
@@ -293,10 +293,10 @@ public class PathSearching { // FRAME
 		if(solving) {
 			switch(curAlg) {
 				case 0:
-					Alg.Dijkstra();
+					Alg.Dijkstra(this);
 					break;
 				case 1:
-					Alg.AStar();
+					Alg.AStar(this);
 					break;
 			}
 		}
@@ -319,7 +319,7 @@ public class PathSearching { // FRAME
 	public void Update() {	//UPDATE ELEMENTS OF THE GUI
 		density = (cells*cells)*dense;
 		CSIZE = MSIZE/cells;
-		canvas.repaint();
+		canvas.pane.repaint();
 		cellsL.setText(cells+"x"+cells);
 		msL.setText(delay+"ms");
 		lengthL.setText("Path Length: "+length);

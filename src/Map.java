@@ -8,9 +8,9 @@ public class Map extends PathSearching implements MouseListener, MouseMotionList
    *
    */
   private static final long serialVersionUID = 1L;
-
+  JPanel pane;
   public Map(){
-      JPanel pane = new JPanel();
+      pane = new JPanel();
 			pane.addMouseListener(this);
 			pane.addMouseMotionListener(this);
 		}
