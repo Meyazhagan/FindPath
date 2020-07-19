@@ -14,8 +14,8 @@ public class Node extends PathSearching{
     pathL = -1;
   }
 
-  public double getEuclidDIst(){
-    int xdis = Math.abs(x - finishX);
+  public double getEuclidDist(){
+    int xdis = Math.abs(x - finishx);
     int ydis = Math.abs(y - finishy);
     dToEnd = Math.sqrt((xdis*xdis) + (ydis*ydis));
     return dToEnd;
@@ -28,7 +28,7 @@ public class Node extends PathSearching{
   public int getType() {return type;}
   public int getPathL() {return pathL;}
   
-  public void settype(int type) {this.type = type;}		//SET METHODS
+  public void setType(int type) {this.type = type;}		//SET METHODS
   public void setLastNode(int x, int y) {lastx = x; lasty = y;}
   public void setPathL(int pathL) {this.pathL = pathL;}
 
