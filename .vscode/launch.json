@@ -1,21 +1,27 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "java",
-      "name": "CodeLens (Launch) - PathSearching",
-      "request": "launch",
-      "mainClass": "PathSearching",
-      "projectName": "FindPath_1d0c2fde"
-    },
-    {
-      "type": "java",
-      "name": "Debug (Launch) - Current File",
-      "request": "launch",
-      "mainClass": "${file}"
-    },
-  ]
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch) - Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PathSearch<FindPath_1d0c2fde>",
+            "request": "launch",
+            "mainClass": "PathSearch",
+            "projectName": "FindPath_1d0c2fde"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Launch)-PathFinding",
+            "request": "launch",
+            "mainClass": "PathFinding"
+        }
+    ]
 }
