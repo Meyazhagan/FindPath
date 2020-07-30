@@ -3,11 +3,17 @@ public class Node
 {
     int x;
     int y;
-    int status; // defines cells status like empty, wall, start, finish, path.
+    int status; // defines cells status like 0 - empty, 1 - wall, 2- path, 3- currentpath, 4 - finished,5- start, 6 - finish
     int lastx; 
     int lasty;
     int len; // total number of nodes in path
     int dist; // distance between nodes to end
+
+    public Node(int x, int y, int status){
+        this.x = x;
+        this.y = y;
+        this.status = status;
+    }
 
     public int getX()
     {
@@ -56,4 +62,5 @@ public class Node
         this.lastx = lastx;
         this.lasty = lasty;
     }
+
 }

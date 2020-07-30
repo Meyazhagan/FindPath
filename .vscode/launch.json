@@ -6,22 +6,16 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Debug (Launch) - Current File",
-            "request": "launch",
-            "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Debug (Launch)-PathSearch<FindPath_1d0c2fde>",
+            "name": "CodeLens (Launch) - PathSearch",
             "request": "launch",
             "mainClass": "PathSearch",
             "projectName": "FindPath_1d0c2fde"
         },
         {
             "type": "java",
-            "name": "Debug (Launch)-PathFinding",
+            "name": "Debug (Launch) - Current File",
             "request": "launch",
-            "mainClass": "PathFinding"
+            "mainClass": "${file}"
         }
     ]
 }
