@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.Random;
 
 import javax.swing.*;
+import javax.swing.event.*;
 
 public class PathSearch {
     JFrame frame;
@@ -25,14 +26,6 @@ public class PathSearch {
     protected Node[][] map;
 
     Map panel;
-    JPanel tools;
-    JLabel cellL;
-    JLabel cellS;
-    JSlider cellSlider;
-    JLabel drawL;
-    JToggleButton draw;
-    JLabel chooseL;
-    JComboBox choose;
 
     public PathSearch() {
         init();
@@ -41,7 +34,7 @@ public class PathSearch {
     public void init() {
         frame = new JFrame();
         frame.setVisible(true);
-        frame.setSize(900, 660);
+        frame.setSize(650, 660);
         // frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
@@ -50,31 +43,10 @@ public class PathSearch {
         create();
         map[startx][starty].setStatus(5);
         map[finishx][finishy].setStatus(6);
-        
-        tools = new JPanel();
-        tools.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        tools.setBounds(625, 10, 350, 601);
-
-        // cellL = new JLabel("cell ");
-        // cellL.setBounds(10, space, 100, 20);
-        // tools.add(cellL);
-        // space += buffer;
-
-        // cellSlider = new JSlider();
-        // cellSlider.setBounds(10, space, 50, 20);
-        // cellSlider.addChangeListener(new ChangeListener(){
-
-		// 	@Override
-		// 	public void stateChanged(ChangeEvent e) {
-				
-		// 	}
-        // });
-        // tools.add(cellSlider);
 
         panel = new Map(this);
         panel.setBounds(10, 10, 601,601);
         frame.add(panel);
-        frame.add(tools);
     }
     public void create(){
         map = new Node[cell][cell];
