@@ -88,41 +88,45 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
         int fx = path.getFinishx();
         int fy = path.getFinishy();
         if(sx ==x && sy ==y){
-            path.map[sx][sy].setStatus(0);
             start = true;
         } 
         if(fx==x && fy==y){
-            path.map[fx][fy].setStatus(0);
             finish = true;
         }   
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getX()< 600 && e.getY() < 600)
+        int sx = path.getStartX();
+        int sy = path.getStartY();
+        int fx = path.getFinishx();
+        int fy = path.getFinishy();
+        int x = e.getX()/cSize;
+        int y = e.getY()/cSize;
+
+        if(e.getX()< 600 && e.getY() < 600 && e.getX() > 0 && e.getY() > 0)
         {
-            int x = e.getX()/cSize;
-            int y = e.getY()/cSize;
-            if(start)
+            if(start && !(x==fx && y==fy))
             {
+                path.map[sx][sy].setStatus(0);
                 path.map[x][y].setStatus(5);
                 path.setStartX(x); 
                 path.setStartY(y);
             }
-            if(finish)
+            if(finish && !(x==sx && y==sy))
             {
+                path.map[fx][fy].setStatus(0);
                 path.map[x][y].setStatus(6);
                 path.setFinishX(x); 
                 path.setFinishY(y);
             }
         }
         else{
-            int sx = path.getStartX();
-            int sy = path.getStartY();
-            int fx = path.getFinishx();
-            int fy = path.getFinishy();
-            path.map[sx][sy].setStatus(5);
-            path.map[fx][fy].setStatus(6);
+            if(start)
+                path.map[sx][sy].setStatus(5);
+            
+            if(finish)
+                path.map[fx][fy].setStatus(6);
         }
         start = false;
         finish = false;
