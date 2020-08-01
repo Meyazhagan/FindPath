@@ -8,8 +8,6 @@ public class Node
     int lasty;
     int len; // total number of nodes in path
     double dist; // distance between nodes to end
-    int finishx;
-    int finishy;
 
     public Node(int x, int y, int status){
         this.x = x;
@@ -48,10 +46,10 @@ public class Node
         return len;
     }
 
-    public double getDist()
+    public double getEuclidDist(PathSearch p)
     {
-        int xdis = Math.abs(x - finishx);
-        int ydis = Math.abs(y - finishy);
+        int xdis = Math.abs(x - p.getFinishx());
+        int ydis = Math.abs(y - p.getFinishy());
         dist = Math.sqrt((xdis*xdis) + (ydis*ydis));
         return dist;
     }
@@ -67,14 +65,5 @@ public class Node
     public void setLastNode(int lastx, int lasty){
         this.lastx = lastx;
         this.lasty = lasty;
-    }
-
-    public void finishx(int finishx){
-        this.finishx = finishx;
-    }
-
-    public void finishy(int finishy)
-    {
-        this.finishy = finishy;
     }
 }

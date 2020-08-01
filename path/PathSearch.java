@@ -1,14 +1,14 @@
 
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 
 public class PathSearch {
     JFrame frame;
 
-    protected int cell = 50;
+    protected int cell = 20;
 
     protected final int MSIZE = 600;
     protected int CSIZE = MSIZE / cell;
@@ -17,10 +17,10 @@ public class PathSearch {
 
     Random r = new Random();
 
-    protected int startx = r.nextInt(cell);
-    protected int starty = r.nextInt(cell);
-    protected int finishx = r.nextInt(cell);
-    protected int finishy = r.nextInt(cell);
+    protected int startx;
+    protected int starty;
+    protected int finishx;
+    protected int finishy;
     protected int length;
 
     protected boolean drawStatus = true;
@@ -56,8 +56,7 @@ public class PathSearch {
         frame.getContentPane().setLayout(null);
 
         create();
-        map[startx][starty].setStatus(5);
-        map[finishx][finishy].setStatus(6);
+        createPoints();
 
         draw =  new JToggleButton("Draw");
         draw.setBounds(20, 620, 100, 30);
@@ -91,6 +90,7 @@ public class PathSearch {
                 {
                     start.setText("Start");
                     solving = false;
+                    clear();
                 }
             } 
         });
@@ -113,6 +113,7 @@ public class PathSearch {
 
         generate = new JButton("Generate Map");
         generate.setBounds(450, 620, 150, 30);
+        generate.setBorder(null);
         generate.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
@@ -120,7 +121,7 @@ public class PathSearch {
             }
         });
 
-        algo = new Algorithm();
+        algo = new Algorithm(this);
 
         panel = new Map(this);
         panel.setBounds(10, 10, 601,601);
@@ -163,6 +164,25 @@ public class PathSearch {
                 map[i][j] = new Node(i, j , 0);
             }
         }
+    }
+    public void clear(){
+        for(int i =0; i < cell; i++){
+            for(int j = 0; j < cell ; j++){
+                map[i][j].setStatus(0);
+                map[i][j].setLen(-1);
+            }
+        }
+        createPoints();
+    }
+
+    public void createPoints(){
+        startx = r.nextInt(cell);
+        starty = r.nextInt(cell);
+        finishx = r.nextInt(cell);
+        finishy = r.nextInt(cell);
+     
+        map[startx][starty].setStatus(5);
+        map[finishx][finishy].setStatus(6);
     }
 
     public void generatePuzzle(){
@@ -232,96 +252,10 @@ public class PathSearch {
         this.length = length;
     }
 
-    class Algorithm 
-    {
-
-        public void aStar()
-        {
-            final ArrayList<Node> priority = new ArrayList<>();
-            priority.add(map[getStartX()][getStartY()]);
-            while(solving){
-                if(priority.size() <= 0){
-                    solving = false;
-                    break;
-                }
-                final int pathLen = priority.get(0).getLen() + 1;
-                final ArrayList<Node> explored = exploreNearBy(priority.get(0), pathLen);
-                if(explored.size() > 0){
-                    explored.remove(0);
-                    priority.addAll(explored);
-                    panel.repaint();
-                }
-                else{
-                    priority.remove(0);
-                }
-                sortQue(priority);
-                
-                System.out.println("is start");
-            }
-            
-        }
-
-        private ArrayList<Node> sortQue(ArrayList<Node> p) 
-        {
-            int c = 0;
-            while(c < p.size()){
-                int sm = c;
-                for(int i = c+1; i < p.size();i++){
-                    if(p.get(i).getDist() + p.get(i).getLen() < p.get(sm).getDist() + p.get(sm).getLen())
-                        sm = i;
-                }
-                if(c != sm){
-                    Node temp = p.get(c);
-                    p.set(c, p.get(sm));
-                    p.set(sm, temp);
-                }
-            }
-            return p;
-        }
-
-        private ArrayList<Node> exploreNearBy(Node current, int pathLen) {
-            final ArrayList<Node> explore = new ArrayList<>();
-            for(int a = -1; a <= 1; a++){
-                for(int b =-1; b <= 1; b++){
-                    int xbound = current.getX() + a;
-                    int ybound = current.getY() + b;
-                    if(xbound >-1&& xbound <cell && ybound >-1&& ybound <cell){
-                        final Node near = map[xbound][ybound];
-                        if(near.getStatus() == 1 ){
-                            explore(near, current.getX(), current.getY(), pathLen);
-                            explore.add(near);
-                        }
-                    }
-
-                }
-            }
-            return explore;
-        }
-
-        private void explore(Node current, int x, int y, int pathLen) 
-        {
-            if(current.getStatus() != 5 && current.getStatus() != 6)
-                current.setStatus(4);
-
-            current.setLastNode(x, y);
-            current.setLen(pathLen);
-
-            if(current.getStatus() ==1)
-                backTrack(current.getLastX(), current.getLastY(), pathLen);        
-        }
-
-        private void backTrack(int lastX, int lastY, int pathLen) 
-        {
-            setLength(pathLen);
-            while(pathLen > 1){
-                final Node current = map[lastX][lastY];
-                current.setStatus(3);
-                lastX = current.getLastX();
-                lastY = current.getLastY();
-                pathLen--;
-            }
-            solving = false;
-        }
-
-    }
+    public void delay() 
+	{
+		try {
+			Thread.sleep(100);
+		} catch(Exception e) {}
+	}
 }

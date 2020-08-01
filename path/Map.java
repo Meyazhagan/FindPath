@@ -36,9 +36,6 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 		{
 			for(int y = 0; y < cell; y++) 
 			{
-                if(path.map[x][y].getStatus()== 4){
-                    System.out.println("status 4");
-                }
                 switch(path.map[x][y].getStatus())
                 {
                     case 0: g.setColor(Color.WHITE);
@@ -49,7 +46,7 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
                         break;
                     case 3: g.setColor(Color.GREEN);
                         break;
-                    case 4: g.setColor(Color.RED);
+                    case 4: g.setColor(Color.CYAN);
                         break;
                     case 5: g.setColor(Color.YELLOW);
                         break;
