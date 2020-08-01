@@ -7,11 +7,14 @@ public class Node
     int lastx; 
     int lasty;
     int len; // total number of nodes in path
-    int dist; // distance between nodes to end
+    double dist; // distance between nodes to end
+    int finishx;
+    int finishy;
 
     public Node(int x, int y, int status){
         this.x = x;
         this.y = y;
+        this.len = -1;
         this.status = status;
     }
 
@@ -45,8 +48,11 @@ public class Node
         return len;
     }
 
-    public int getDist()
+    public double getDist()
     {
+        int xdis = Math.abs(x - finishx);
+        int ydis = Math.abs(y - finishy);
+        dist = Math.sqrt((xdis*xdis) + (ydis*ydis));
         return dist;
     }
 
@@ -63,4 +69,12 @@ public class Node
         this.lasty = lasty;
     }
 
+    public void finishx(int finishx){
+        this.finishx = finishx;
+    }
+
+    public void finishy(int finishy)
+    {
+        this.finishy = finishy;
+    }
 }

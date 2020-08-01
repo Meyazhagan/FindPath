@@ -10,7 +10,6 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 
     JPanel pane;
     private PathSearch path;
-    private int mSize;
     private int cSize; 
     private int cell;
     private boolean start = false;
@@ -24,7 +23,6 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 
     public Map(PathSearch path){
         this.path = path;
-        this.mSize = path.MSIZE;
         this.cSize = path.CSIZE;
         this.cell = path.cell;
         setFocusable(true);
@@ -38,6 +36,9 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 		{
 			for(int y = 0; y < cell; y++) 
 			{
+                if(path.map[x][y].getStatus()== 4){
+                    System.out.println("status 4");
+                }
                 switch(path.map[x][y].getStatus())
                 {
                     case 0: g.setColor(Color.WHITE);
@@ -89,7 +90,7 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
             else
                 path.map[x][y].setStatus(0);
         }
-        repaint();
+        path.update();
     }
 
     @Override
@@ -155,7 +156,7 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
         }
         start = false;
         finish = false;
-        repaint();
+        path.update();
     }
 
     @Override
