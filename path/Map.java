@@ -62,9 +62,34 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 		}
     }
 
+    protected boolean isInside(int x, int y){
+        return x < 600 && y < 600 && x > 0 && y > 0;
+    }
+
+    protected boolean isIntersect(int x, int y, int nx, int ny){
+        return x == nx && y == ny;
+    }
+
     @Override
     public void mouseDragged(MouseEvent e) 
     {
+        int x = e.getX()/cSize;
+        int y = e.getY()/cSize;
+        int sx = path.getStartX();
+        int sy = path.getStartY();
+        int fx = path.getFinishx();
+        int fy = path.getFinishy();
+        if(isInside(e.getX(), e.getY()) && 
+           !isIntersect(x, y, sx, sy) && 
+           !isIntersect(x, y, fx, fy) &&
+           !start && !finish)
+        {
+            if(path.drawStatus)
+                path.map[x][y].setStatus(1);
+            else
+                path.map[x][y].setStatus(0);
+        }
+        repaint();
     }
 
     @Override
@@ -104,7 +129,7 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
         int x = e.getX()/cSize;
         int y = e.getY()/cSize;
 
-        if(e.getX()< 600 && e.getY() < 600 && e.getX() > 0 && e.getY() > 0)
+        if(isInside(e.getX(), e.getY()))
         {
             if(start && !(x==fx && y==fy))
             {

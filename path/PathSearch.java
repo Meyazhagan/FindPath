@@ -1,18 +1,17 @@
 
-import java.awt.*;
 import java.awt.event.*;
 import java.util.Random;
 
 import javax.swing.*;
-import javax.swing.event.*;
 
 public class PathSearch {
     JFrame frame;
 
-    protected int cell = 20;
+    protected int cell = 50;
 
     protected final int MSIZE = 600;
     protected int CSIZE = MSIZE / cell;
+    protected double genMap = (cell * cell) * 0.5;
 
     Random r = new Random();
 
@@ -20,6 +19,8 @@ public class PathSearch {
     protected int starty = r.nextInt(cell);
     protected int finishx = r.nextInt(cell);
     protected int finishy = r.nextInt(cell);
+
+    protected boolean drawStatus = true;
 
     protected Node[][] map;
 
@@ -55,10 +56,12 @@ public class PathSearch {
                 if(draw.isSelected())
                 {
                     draw.setText("Erase");
+                    drawStatus = false;
                 }
                 else
                 {
                     draw.setText("Draw");
+                    drawStatus = true;
                 }
             } 
         });
@@ -97,6 +100,12 @@ public class PathSearch {
 
         generate = new JButton("Generate Map");
         generate.setBounds(450, 620, 150, 30);
+        generate.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                generatePuzzle();
+            }
+        });
 
         panel = new Map(this);
         panel.setBounds(10, 10, 601,601);
@@ -113,6 +122,20 @@ public class PathSearch {
             for(int j = 0; j < cell ; j++){
                 map[i][j] = new Node(i, j , 0);
             }
+        }
+    }
+
+    public void generatePuzzle(){
+        for(int i =0; i < genMap; i++){
+            int x  = r.nextInt(cell);
+            int y = r.nextInt(cell);
+            if(!panel.isIntersect(x, y, startx, starty) && 
+               !panel.isIntersect(x, y, finishx, finishy) &&
+               !(map[x][y].getStatus() == 1))
+            {
+                map[x][y].setStatus(1);
+            }
+            panel.repaint();
         }
     }
 
