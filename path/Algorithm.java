@@ -48,6 +48,13 @@ class Algorithm
             }
             c++;
         }
+        // if(!p.isEmpty()){
+        //     Node n = p.get(0);
+        //     if(n.getStatus() != 5 && n.getStatus() !=6){
+        //         n.setStatus(3);
+        //         path.update();
+        //     }
+        // }
         return p;
     }
 

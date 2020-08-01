@@ -10,8 +10,6 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 
     JPanel pane;
     private PathSearch path;
-    private int cSize; 
-    private int cell;
     private boolean start = false;
     private boolean finish = false;
 
@@ -23,8 +21,6 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 
     public Map(PathSearch path){
         this.path = path;
-        this.cSize = path.CSIZE;
-        this.cell = path.cell;
         setFocusable(true);
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -32,9 +28,10 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
 
     public void paintComponent(Graphics g) 
     {
-		for(int x = 0; x < cell; x++) 
+        int cSize = path.getCSize();
+		for(int x = 0; x < path.getCell(); x++) 
 		{
-			for(int y = 0; y < cell; y++) 
+			for(int y = 0; y < path.getCell(); y++) 
 			{
                 switch(path.map[x][y].getStatus())
                 {
@@ -44,9 +41,9 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
                         break;
                     case 2: g.setColor(Color.BLUE);
                         break;
-                    case 3: g.setColor(Color.GREEN);
+                    case 3: g.setColor(Color.RED);
                         break;
-                    case 4: g.setColor(Color.CYAN);
+                    case 4: g.setColor(Color.GREEN);
                         break;
                     case 5: g.setColor(Color.YELLOW);
                         break;
@@ -71,8 +68,8 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void mouseDragged(MouseEvent e) 
     {
-        int x = e.getX()/cSize;
-        int y = e.getY()/cSize;
+        int x = e.getX()/path.getCSize();
+        int y = e.getY()/path.getCSize();
         int sx = path.getStartX();
         int sy = path.getStartY();
         int fx = path.getFinishx();
@@ -104,8 +101,8 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
     @Override
     public void mousePressed(MouseEvent e) 
     {
-        int x = e.getX()/cSize;
-        int y = e.getY()/cSize;
+        int x = e.getX()/path.getCSize();
+        int y = e.getY()/path.getCSize();
         int sx = path.getStartX();
         int sy = path.getStartY();
         int fx = path.getFinishx();
@@ -124,8 +121,8 @@ public class Map extends JPanel implements MouseListener, MouseMotionListener
         int sy = path.getStartY();
         int fx = path.getFinishx();
         int fy = path.getFinishy();
-        int x = e.getX()/cSize;
-        int y = e.getY()/cSize;
+        int x = e.getX()/path.getCSize();
+        int y = e.getY()/path.getCSize();
 
         if(isInside(e.getX(), e.getY()))
         {

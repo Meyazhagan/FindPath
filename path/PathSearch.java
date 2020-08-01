@@ -3,12 +3,11 @@ import java.awt.event.*;
 import java.util.Random;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 
 public class PathSearch {
     JFrame frame;
 
-    protected int cell = 20;
+    protected int cell = 50;
 
     protected final int MSIZE = 600;
     protected int CSIZE = MSIZE / cell;
@@ -48,7 +47,7 @@ public class PathSearch {
 
     public void init() {
         frame = new JFrame();
-        frame.setSize(640, 700);
+        frame.setSize(640, 750);
         frame.setResizable(false);
         frame.setTitle("Path Finding - A* Searching Algorithms");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,7 +89,6 @@ public class PathSearch {
                 {
                     start.setText("Start");
                     solving = false;
-                    clear();
                 }
             } 
         });
@@ -113,11 +111,22 @@ public class PathSearch {
 
         generate = new JButton("Generate Map");
         generate.setBounds(450, 620, 150, 30);
-        generate.setBorder(null);
+        generate.setBorderPainted(false);
         generate.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 generatePuzzle();
+            }
+        });
+
+        clear = new JButton("Clear");
+        clear.setBounds(230, 670, 100, 30 );
+        clear.setBorderPainted(false);
+        clear.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                clear();
+                panel.repaint();
             }
         });
 
@@ -130,6 +139,7 @@ public class PathSearch {
         frame.add(start);
         frame.add(path);
         frame.add(generate);
+        frame.add(clear);
         frame.setVisible(true);
         
         startSearching();
@@ -195,12 +205,8 @@ public class PathSearch {
             {
                 map[x][y].setStatus(1);
             }
-            update();
+            panel.repaint();
         }
-    }
-
-    public void update(){
-        panel.repaint();
     }
 
     public static void main(String[] args) 
@@ -257,5 +263,21 @@ public class PathSearch {
 		try {
 			Thread.sleep(100);
 		} catch(Exception e) {}
+    }
+    
+    public int getCell(){
+        return cell;
+    }
+
+    public int getCSize(){
+        return CSIZE;
+    }
+
+    public double getGenMap(){
+        return genMap;
+    }
+
+	public void update() {
+        panel.repaint();
 	}
 }
