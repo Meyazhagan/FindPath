@@ -28,6 +28,7 @@ public class PathSearch {
     JToggleButton draw;
     JToggleButton start;
     JToggleButton path;
+    JButton generate;
 
     public PathSearch() {
         init();
@@ -35,7 +36,6 @@ public class PathSearch {
 
     public void init() {
         frame = new JFrame();
-        frame.setVisible(true);
         frame.setSize(640, 700);
         frame.setResizable(false);
         frame.setTitle("Path Finding - A* Searching Algorithms");
@@ -48,40 +48,55 @@ public class PathSearch {
         map[finishx][finishy].setStatus(6);
 
         draw =  new JToggleButton("Draw");
-        draw.setBounds(40, 620, 150, 30);
+        draw.setBounds(20, 620, 100, 30);
         draw.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(draw.isSelected())
+                {
                     draw.setText("Erase");
+                }
                 else
-                    draw.setText("draw");
+                {
+                    draw.setText("Draw");
+                }
             } 
         });
 
         start = new JToggleButton("Start");
-        start.setBounds(250, 620, 150, 30);
+        start.setBounds(160, 620, 100, 30);
         start.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(start.isSelected())
-                    start.setText("start");
+                {
+                    start.setText("Stop");
+                }
                 else
-                    start.setText("stop");
+                {
+                    start.setText("Start");
+                }
             } 
         });
 
         path = new JToggleButton("Path");
-        path.setBounds(450, 620, 150, 30);
+        path.setBounds(310, 620, 100, 30);
         path.addItemListener(new ItemListener(){
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(path.isSelected())
-                    path.setText("visualize");
+                {
+                    path.setText("Visualize");
+                }
                 else
-                    path.setText("path");
+                {
+                    path.setText("Path");
+                }
             } 
         });
+
+        generate = new JButton("Generate Map");
+        generate.setBounds(450, 620, 150, 30);
 
         panel = new Map(this);
         panel.setBounds(10, 10, 601,601);
@@ -89,6 +104,8 @@ public class PathSearch {
         frame.add(draw);
         frame.add(start);
         frame.add(path);
+        frame.add(generate);
+        frame.setVisible(true);
     }
     public void create(){
         map = new Node[cell][cell];
