@@ -7,7 +7,7 @@ import javax.swing.*;
 public class PathSearch {
     JFrame frame;
 
-    protected int cell = 50;
+    protected int cell = 40;
 
     protected final int MSIZE = 600;
     protected int CSIZE = MSIZE / cell;
@@ -49,7 +49,7 @@ public class PathSearch {
         frame = new JFrame();
         frame.setSize(640, 750);
         frame.setResizable(false);
-        frame.setTitle("Path Finding - A* Searching Algorithms");
+        frame.setTitle("Path Finding - A* Searching Algorithms By Meyazhagan");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(null);
